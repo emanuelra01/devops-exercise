@@ -9,12 +9,12 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # COPY APP FILE
-COPY .app.py .app.py
-COPY .requirements.txt .requirements.txt
+COPY app.py app.py
+COPY requirement.txt requirement.txt
 
 # INSTALL APP DEPENDENCIES
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirement.txt
 
 # RUN APP
 CMD ["python", "app.py"]
