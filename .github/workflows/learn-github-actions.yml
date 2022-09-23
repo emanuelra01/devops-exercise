@@ -7,7 +7,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  DOCKER_USER: ${{secrets.DOCKER_USER}}
+  DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
   DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
   REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME}}
 
@@ -26,7 +26,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           #registry: ${{ env.REGISTRY }}
-          username: ${{secrets.DOCKER_USER}}
+          username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
 
       - name: Extract metadata (tags, labels) for Docker
