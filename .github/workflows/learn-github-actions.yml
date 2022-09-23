@@ -36,7 +36,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build Docker Image
-        run: docker build . --file Dockerfile --tag ${{ steps.meta.outputs.tags }}
+        run: docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPOSITORY_NAME:${{ steps.date.outputs.date }}
       
       - name: Push Docker Image to Docker Hub
-        run: docker push ${{ steps.meta.outputs.tags }}
+        run: docker push $DOCKER_USERNAME/$REPOSITORY_NAME:${{ steps.date.outputs.date }}
