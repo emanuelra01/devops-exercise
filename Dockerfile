@@ -1,7 +1,7 @@
 FROM python
 
 #UPDATE IMAGE
-RUN apt update && apt upgrade
+RUN apt update -y && apt upgrade -y
 
 
 # CREATE APP DIRECTORY
