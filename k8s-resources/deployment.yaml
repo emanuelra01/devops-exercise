@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devops-exercise
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-exercise
+  namespace: devops-exercise
+spec:
+  selector:
+    matchLabels:
+      app: devops-exercise
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devops-exercise
+    spec:
+      containers:
+      - name: devops-exercise-deploy
+        image: emmanuelra01/devops-exercise:latest
+        resources:
+          requests:
+            memory: "64M"
+            cpu: "250m"
+          limits:
+            memory: "512M"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-exercise-service
+  namespace: devops-exercise
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    protocol: TCP
+    port: 5000
+    targetPort: 5000
+  selector:
+    app: devops-exercise
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: devops-exercise
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  namespace: devops-exercise
+spec:
+  #ingressClassName: nginx-example
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: devops-exercise-service
+            port:
+              number: 5000
