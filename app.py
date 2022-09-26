@@ -1,10 +1,19 @@
-from flask import Flask
+#from urllib import request
+from flask import Flask, request
+from multiprocessing import Value
 
+counter = Value('i', 0)
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def hello():
-    return "Hello World!!!"
+    output = "Hello World!!!"
+    if request.method == 'POST':
+        with counter.get_lock():
+            counter.value += 1
+            output = '''<h1>The count value is: {}</h1>'''.format(counter.value)
+    
+    return output
 
 
 if __name__ == "__main__":
