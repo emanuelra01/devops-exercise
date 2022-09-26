@@ -3,7 +3,7 @@ name: Create and publish a Docker image
 on:
   push:
     #branches: ['feature/dockerize-application']
-    branches: ['master', 'feature/dockerize-application', 'deploy-kubernetes']
+    branches: ['master', 'feature/dockerize-application', 'feature/deploy-kubernetes']
 
 env:
   REGISTRY: ghcr.io
