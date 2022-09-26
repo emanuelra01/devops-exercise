@@ -2,8 +2,8 @@ name: Create and publish a Docker image
 
 on:
   push:
-    #branches: ['master']
-    branches: ['master', 'feature/dockerize-application', 'feature/deploy-kubernetes', 'feature/improve-service']
+    branches: ['master']
+    #branches: ['master', 'feature/dockerize-application', 'feature/deploy-kubernetes', 'feature/improve-service']
 
 env:
   DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
