@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: devops-exercise
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-exercise-service
+  namespace: devops-exercise
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    protocol: TCP
+    port: 5000
+  selector:
+    run: devops-exercise
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-exercise-app
+  namespace: devops-exercise
+spec:
+  selector:
+    matchLabels:
+      app: devops-exercise
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devops-exercise
+    spec:
+      containers:
+      - name: devops-exercise-deploy
+        image: emmanuelra01/devops-exercise:latest
+        ports:
+        - containerPort: 5000
+          protocol: TCP
