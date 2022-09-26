@@ -58,3 +58,14 @@ Spend some time on designing your solution. Think about operational use cases fr
 
 - [Run a Stateless Application Using a Deployment](https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/)
 
+## NOTE
+
+1. Remember to create the **DOCKER_USERNAME, DOCKER_PASSWORD, REPOSITORY_NAME** action secrets in your GitHub project so that the project can work.
+
+2. Remember to enable ingress in minikube with the following command.
+
+**minikube addons enable ingress**
+
+3. The app is deployed with the following command
+
+**kubectl apply -f k8s-resources/deployment.yaml**
